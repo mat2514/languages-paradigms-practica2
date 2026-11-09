@@ -31,8 +31,6 @@ Everything is in one file, `main.cpp`:
 
 ## Written answers to the defence questions
 
-PENDIENTE: confirm with the professor which is the second defence question. Question 1 is named in the practice PDF; the other two answers below are the likely candidates.
-
 **Question 1. What happens if the destructor of `TransportMode` is not virtual?**
 The modes are stored as `std::unique_ptr<TransportMode>`, so they are destroyed through a pointer to the base class. Without a virtual destructor only the base destructor runs, which is undefined behaviour: the derived part of the object is not destroyed properly. With a virtual destructor the derived destructor runs first and then the base one.
 
