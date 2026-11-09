@@ -34,8 +34,8 @@ Everything is in one file, `main.cpp`:
 **Question 1. What happens if the destructor of `TransportMode` is not virtual?**
 The modes are stored as `std::unique_ptr<TransportMode>`, so they are destroyed through a pointer to the base class. Without a virtual destructor only the base destructor runs, which is undefined behaviour: the derived part of the object is not destroyed properly. With a virtual destructor the derived destructor runs first and then the base one.
 
-**Question 2 (candidate A). Why an abstract class with pure virtual functions instead of an enum plus a switch?**
+**Question 2. Why an abstract class with pure virtual functions instead of an enum plus a switch?**
 With an enum and a switch, every new mode forces us to open and modify several places. With polymorphism a new mode is one new class and nothing else changes. It also avoids asking an object what type it is, which is forbidden by Rule A.
 
-**Question 2 (candidate B). What does the STL give us over a hand-written loop?**
+**Question 3. What does the STL give us over a hand-written loop?**
 Each algorithm says what is done (`accumulate` adds, `count_if` counts) instead of how the container is traversed, so the code is shorter, easier to read and has fewer chances of off-by-one mistakes. A lambda keeps the small rule next to the call, and `std::function` lets the caller inject a criterion without the network knowing it.
